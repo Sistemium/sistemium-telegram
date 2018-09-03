@@ -2,7 +2,7 @@
   "name": "sistemium-telegram",
   "version": "1.0.0",
   "description": "Telegram bot helper",
-  "main": "lib",
+  "main": "index.js",
   "dependencies": {
     "debug": "^3.1.0",
     "lodash": "^4.17.10",
@@ -22,7 +22,10 @@
   "scripts": {
     "lint": "eslint config lib services",
     "test": "npm run lint",
-    "babel-node": "babel-node"
+    "babel-node": "babel-node",
+    "start": "nodemon --exec 'npm run lint && babel-node' -- src/index.js",
+    "pkg": "cp package.json dist",
+    "build": "npm run lint && babel src -d dist && npm run pkg"
   },
   "repository": {
     "type": "git",
