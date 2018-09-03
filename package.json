@@ -2,12 +2,27 @@
   "name": "sistemium-telegram",
   "version": "1.0.0",
   "description": "Telegram bot helper",
-  "main": "lib/index.js",
-  "directories": {
-    "lib": "lib"
+  "main": "lib",
+  "dependencies": {
+    "debug": "^3.1.0",
+    "lodash": "^4.17.10",
+    "redis": "^2.8.0",
+    "telegraf": "^3.22.2",
+    "telegraf-session-redis": "^5.0.0"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-plugin-transform-object-rest-spread": "^6.26.0",
+    "babel-preset-env": "^1.7.0",
+    "eslint": "^4.19.1",
+    "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-import": "^2.13.0",
+    "nodemon": "^1.18.3"
   },
   "scripts": {
-    "test": "npm run lint"
+    "lint": "eslint config lib services",
+    "test": "npm run lint",
+    "babel-node": "babel-node"
   },
   "repository": {
     "type": "git",
@@ -22,5 +37,8 @@
   "bugs": {
     "url": "https://github.com/Sistemium/sistemium-telegram/issues"
   },
-  "homepage": "https://github.com/Sistemium/sistemium-telegram#readme"
+  "homepage": "https://github.com/Sistemium/sistemium-telegram#readme",
+  "engines": {
+    "node": "8.11.3"
+  }
 }
