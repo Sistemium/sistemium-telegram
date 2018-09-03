@@ -1,0 +1,26 @@
+{
+  "name": "sistemium-telegram",
+  "version": "1.0.0",
+  "description": "Telegram bot helper",
+  "main": "lib/index.js",
+  "directories": {
+    "lib": "lib"
+  },
+  "scripts": {
+    "test": "npm run lint"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sistemium/sistemium-telegram.git"
+  },
+  "keywords": [
+    "telegram",
+    "telegraph"
+  ],
+  "author": "Sistemium UAB",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Sistemium/sistemium-telegram/issues"
+  },
+  "homepage": "https://github.com/Sistemium/sistemium-telegram#readme"
+}
