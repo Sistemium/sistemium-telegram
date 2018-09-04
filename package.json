@@ -11,11 +11,6 @@
     "telegraf-session-redis": "^5.0.0"
   },
   "devDependencies": {
-    "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
-    "@babel/node": "^7.0.0",
-    "@babel/plugin-proposal-object-rest-spread": "^7.0.0",
-    "@babel/preset-env": "^7.0.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
@@ -24,7 +19,6 @@
   "scripts": {
     "lint": "eslint config lib services",
     "test": "npm run lint",
-    "babel-node": "babel-node",
     "start": "nodemon --exec 'npm run lint && babel-node' -- src/index.js",
     "pkg": "cp package.json dist",
     "build": "npm run lint && babel src -d dist && npm run pkg"
