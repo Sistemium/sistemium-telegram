@@ -1,3 +1,3 @@
-import bot from '../services/bot';
+import bot from './services/bot';
 
 export default bot;
