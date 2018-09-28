@@ -4,6 +4,7 @@
   "description": "Telegram bot helper",
   "main": "index.js",
   "dependencies": {
+    "async": "^2.6.1",
     "debug": "^3.1.0",
     "lodash": "^4.17.10",
     "redis": "^2.8.0",
