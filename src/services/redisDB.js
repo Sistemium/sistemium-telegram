@@ -6,7 +6,7 @@ export const { getId } = redis;
 
 export async function findAll(hashName) {
   const res = await redis.hgetallAsync(hashName);
-  return res && map(res, JSON.parse);
+  return res ? map(res, JSON.parse) : [];
 }
 
 export async function destroy(hashName, id) {
