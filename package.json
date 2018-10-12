@@ -23,12 +23,13 @@
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
     "eslint-plugin-import": "^2.13.0",
+    "jest": "^23.6.0",
     "nodemon": "^1.18.3"
   },
   "scripts": {
     "dev": "npm run lint && rm -rf dev && cp -r src dev && cp package.json dev && cd dev && npm link",
     "lint": "eslint src",
-    "test": "npm run lint",
+    "test": "jest",
     "babel-node": "babel-node",
     "pkg": "cp package.json dist",
     "build": "npm run lint && rm -rf dist && babel src -d dist && npm run pkg"
