@@ -23,6 +23,12 @@ export function authorize(token, org) {
       },
     },
 
+
+    deserialize(resource, response, options) {
+      Object.assign(options, { xOffset: response.headers['x-offset'] });
+      return response.data;
+    },
+
     queryTransform(mapper, params, options) {
       return queryTransform(params, options);
     },
