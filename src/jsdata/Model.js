@@ -1,6 +1,7 @@
 import log from '../services/log';
 import { serverDateTimeFormat } from '../services/moments';
 import store from './store';
+import { whilstAsync } from '../services/async';
 
 const { debug } = log('model');
 
@@ -108,6 +109,44 @@ export default class Model {
         debug('find:error', name, id, err.message || err);
         return Promise.reject(err);
       });
+  }
+
+  fetchAll(query, options) {
+
+    const { name } = this;
+
+    let pgSize = 1;
+
+    let offset = '*';
+
+    return new Promise(async (resolve, reject) => {
+
+      try {
+
+        const result = [];
+
+        await whilstAsync(
+          () => pgSize > 0,
+          async () => {
+            const opts = { ...options };
+            const fetched = await this.store.findAll(name, {
+              'x-offset:': offset,
+              ...query,
+            }, opts);
+            pgSize = fetched.length;
+            offset = opts.xOffset;
+            result.push(...fetched);
+          },
+        );
+
+        resolve(result);
+
+      } catch (e) {
+        reject(e);
+      }
+
+    });
+
   }
 
   findAll(query, options) {
