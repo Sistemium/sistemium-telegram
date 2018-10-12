@@ -17,6 +17,7 @@ export default class Model {
     this.store = store;
     this.mapper = store.defineMapper(name, {
       notify: false,
+      ...config,
       methods,
       safeInject: data => this.safeInject(data),
       // TODO: find out how to get this working
