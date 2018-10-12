@@ -5,15 +5,16 @@ import { HttpAdapter } from 'js-data-http';
 import queryTransform from './httpAdapter';
 
 const store = new DataStore();
-// const debug = require('debug')('stm:drv:store');
 
 export default store;
+
+const { API_URL } = process.env;
 
 export function authorize(token, org) {
 
   const httpOptions = {
 
-    basePath: `/api/${org}`,
+    basePath: `${API_URL || '/api'}/${org}`,
 
     httpConfig: {
       headers: {
