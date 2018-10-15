@@ -5,21 +5,28 @@ import { HttpAdapter } from 'js-data-http';
 import queryTransform from './httpAdapter';
 
 const store = new DataStore();
-// const debug = require('debug')('stm:drv:store');
 
 export default store;
+
+const { API_URL } = process.env;
 
 export function authorize(token, org) {
 
   const httpOptions = {
 
-    basePath: `/api/${org}`,
+    basePath: `${API_URL || '/api'}/${org}`,
 
     httpConfig: {
       headers: {
         authorization: token,
         'x-page-size': 1000,
       },
+    },
+
+
+    deserialize(resource, response, options) {
+      Object.assign(options, { xOffset: response.headers['x-offset'] });
+      return response.data;
     },
 
     queryTransform(mapper, params, options) {
