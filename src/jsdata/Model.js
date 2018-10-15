@@ -1,3 +1,4 @@
+import filter from 'lodash/filter';
 import log from '../services/log';
 import { serverDateTimeFormat } from '../services/moments';
 import store from './store';
@@ -98,8 +99,17 @@ export default class Model {
     return this.store.get(this.name, id);
   }
 
-  getAll(ids) {
-    return this.store.getAll(this.name, ids);
+  getAll() {
+    return this.store.getAll(this.name, ...arguments);
+  }
+
+  /**
+   * Returns an array of records with matching ids
+   * @param {array} ids
+   * @returns {Array}
+   */
+  getMany(ids) {
+    return filter(ids.map(id => this.get(id)));
   }
 
   find(id, options) {
