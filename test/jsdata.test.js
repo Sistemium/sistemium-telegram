@@ -84,6 +84,9 @@ test('fetch all article fetch size 1000', async () => {
 test('find all article, articleGroup, articlePicture', async () => {
 
   const limit = 20000;
+  const name = 'findAll';
+
+  console.log(name, 'start');
 
   await ArticleGroup.findAll({
     limit,
@@ -105,13 +108,19 @@ test('fetch all article, articleGroup, articlePicture fetch size 1000', async ()
     limit: 1000,
   });
 
+  console.log('done ArticleGroup');
+
   await ArticlePicture.fetchAll({
     limit: 1000,
   });
 
+  console.log('done ArticlePicture');
+
   await Article.fetchAll({
     limit: 1000,
   });
+
+  console.log('done Article');
 
 });
 
