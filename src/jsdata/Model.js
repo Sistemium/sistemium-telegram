@@ -134,8 +134,6 @@ export default class Model {
 
     const { name } = this;
 
-    let pgSize = 1;
-
     let { lastFetchOffset: offset } = this;
 
     return new Promise(async (resolve, reject) => {
@@ -143,18 +141,20 @@ export default class Model {
       try {
 
         const result = [];
+        let lastResultLength = query.limit;
 
         await whilstAsync(
-          () => pgSize > 0,
+          () => lastResultLength >= query.limit,
           async () => {
             const opts = { ...options };
             const fetched = await this.store.findAll(name, {
               'x-offset:': offset,
               ...query,
             }, opts);
-            pgSize = fetched.length;
+            lastResultLength = fetched.length;
             offset = opts.xOffset;
-            result.push(...fetched);
+            debug('fetchAll', name, offset, `${lastResultLength}`);
+            Array.prototype.push.apply(result, fetched);
           },
         );
 
