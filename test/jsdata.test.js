@@ -1,11 +1,9 @@
-/* eslint-disable import/no-duplicates */
-import { authorize } from '../src/jsdata/store';
+import store, { authorize } from '../src/jsdata/store';
 import log from '../src/services/log';
 
 import Article from './models/Article';
 import ArticleGroup from './models/ArticleGroup';
 import ArticlePicture from './models/ArticlePicture';
-import store from '../src/jsdata/store';
 
 // eslint-disable-next-line
 const { debug } = log('test:jsdata');
