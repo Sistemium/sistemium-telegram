@@ -17,6 +17,16 @@ export default new Model({
         localField: 'avatarPicture',
         localKey: 'avatarPictureId',
       },
+      // Article: {
+      //   localField: 'sameArticle',
+      //   localKey: 'articleSameId',
+      // },
+    },
+    hasMany: {
+      // Article: {
+      //   localField: 'sameArticles',
+      //   foreignKey: 'articleSameId',
+      // },
     },
   },
 
