@@ -9,7 +9,6 @@
     "axios": "^0.18.0",
     "date-fns": "2.0.0-alpha.8",
     "debug": "^3.1.0",
-    "eslint-plugin-jest": "^21.24.1",
     "js-data": "^3.0.4",
     "js-data-http": "^3.0.1",
     "lodash": "^4.17.10",
@@ -23,6 +22,7 @@
     "babel-preset-env": "^1.7.0",
     "eslint": "^4.19.1",
     "eslint-config-airbnb-base": "^13.0.0",
+    "eslint-plugin-jest": "^21.24.1",
     "eslint-plugin-import": "^2.13.0",
     "jest": "^23.6.0",
     "nodemon": "^1.18.3"
