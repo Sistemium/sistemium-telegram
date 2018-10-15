@@ -1,7 +1,7 @@
 import http from 'axios';
-import STMStore from './STMStore';
 import { HttpAdapter } from 'js-data-http';
 
+import STMStore from './STMStore';
 import queryTransform from './httpAdapter';
 
 const store = new STMStore();
