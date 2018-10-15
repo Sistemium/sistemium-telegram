@@ -17,11 +17,15 @@ export default class Model {
     this.savingIds = {};
     this.name = name;
     this.store = store;
+    this.lastFetchOffset = '*';
     this.mapper = store.defineMapper(name, {
       notify: false,
       ...config,
       methods,
       safeInject: data => this.safeInject(data),
+      clear: () => {
+        this.lastFetchOffset = '*';
+      },
       // TODO: find out how to get this working
       // afterLoadRelations(query, options, response) {
       //   debug('afterLoadRelations', query, options, response);
@@ -100,6 +104,7 @@ export default class Model {
   }
 
   getAll() {
+    // eslint-disable-next-line
     return this.store.getAll(this.name, ...arguments);
   }
 
@@ -131,7 +136,7 @@ export default class Model {
 
     let pgSize = 1;
 
-    let offset = '*';
+    let { lastFetchOffset: offset } = this;
 
     return new Promise(async (resolve, reject) => {
 
@@ -153,6 +158,7 @@ export default class Model {
           },
         );
 
+        this.lastFetchOffset = offset;
         resolve(result);
 
       } catch (e) {

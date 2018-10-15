@@ -1,14 +1,14 @@
 import http from 'axios';
-import { DataStore } from 'js-data';
+import STMStore from './STMStore';
 import { HttpAdapter } from 'js-data-http';
 
 import queryTransform from './httpAdapter';
 
-const store = new DataStore();
-
-export default store;
+const store = new STMStore();
 
 const { API_URL } = process.env;
+
+export default store;
 
 export function authorize(token, org) {
 
