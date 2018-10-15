@@ -97,6 +97,10 @@ export default class Model {
     return this.store.get(this.name, id);
   }
 
+  getAll(ids) {
+    return this.store.getAll(this.name, ids);
+  }
+
   find(id, options) {
     const { name } = this;
     return this.store.find(name, id, options)
