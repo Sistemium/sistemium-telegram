@@ -62,7 +62,7 @@ export default class Model {
   }
 
   async update(record, props) {
-    const res = this.store.update(this.name, record.id, props, { method: 'PATCH' });
+    const res = await this.store.update(this.name, record.id, props, { method: 'PATCH' });
     this.reindex();
     return res;
   }
