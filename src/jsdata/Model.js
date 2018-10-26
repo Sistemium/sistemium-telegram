@@ -1,4 +1,7 @@
 import filter from 'lodash/filter';
+import each from 'lodash/each';
+import groupBy from 'lodash/groupBy';
+
 import log from '../services/log';
 import { serverDateTimeFormat } from '../services/moments';
 import store from './store';
@@ -18,6 +21,8 @@ export default class Model {
     this.name = name;
     this.store = store;
     this.lastFetchOffset = '*';
+    this.indexes = config.indexes;
+    this.indexed = {};
     this.mapper = store.defineMapper(name, {
       notify: false,
       ...config,
@@ -25,6 +30,7 @@ export default class Model {
       safeInject: data => this.safeInject(data),
       clear: () => {
         this.lastFetchOffset = '*';
+        this.reindex();
       },
       // TODO: find out how to get this working
       // afterLoadRelations(query, options, response) {
@@ -39,6 +45,13 @@ export default class Model {
 
   }
 
+  reindex() {
+    const { indexes } = this;
+    each(indexes, prop => {
+      this.indexed[prop] = groupBy(this.getAll(), prop);
+    });
+  }
+
   create(params) {
 
     if (!params.deviceCts) {
@@ -46,6 +59,12 @@ export default class Model {
     }
 
     return this.store.create(this.name, params);
+  }
+
+  async update(record, props) {
+    const res = this.store.update(this.name, record.id, props, { method: 'PATCH' });
+    this.reindex();
+    return res;
   }
 
   /**
@@ -73,6 +92,7 @@ export default class Model {
       }
       delete this.savingIds[id];
       await record.save();
+      this.reindex();
     } catch (e) {
       debug('safeSave:ignore', e);
     }
@@ -95,8 +115,10 @@ export default class Model {
 
   }
 
-  destroy({ id }) {
-    return this.store.destroy(this.name, id);
+  async destroy({ id }) {
+    const res = this.store.destroy(this.name, id);
+    this.reindex();
+    return res;
   }
 
   get(id) {
@@ -122,6 +144,7 @@ export default class Model {
     return this.store.find(name, id, options)
       .then(res => {
         debug('find:success', name, id);
+        this.reindex();
         return res;
       })
       .catch(err => {
@@ -159,6 +182,7 @@ export default class Model {
         );
 
         this.lastFetchOffset = offset;
+        this.reindex();
         resolve(result);
 
       } catch (e) {
@@ -174,6 +198,7 @@ export default class Model {
     return this.store.findAll(name, query, options)
       .then(res => {
         debug('findAll:success', name, `(${res.length})`, query);
+        this.reindex();
         return res;
       })
       .catch(err => {
