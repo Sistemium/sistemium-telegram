@@ -39,7 +39,11 @@ export function monthGenerator(num, date = new Date()) {
 
     const month = addMonths(date, 1 - i);
 
-    return format(month, 'YYYY/MM');
+    const id = format(month, 'YYYY-MM');
+
+    const label = format(month, 'YYYY/MM');
+
+    return { id, label };
 
   });
 
