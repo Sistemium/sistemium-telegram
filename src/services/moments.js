@@ -1,7 +1,7 @@
 import { format, addDays, addMonths } from 'date-fns';
 import { range } from 'lodash';
 
-// import { ru } from 'date-fns/esm/locale';
+import { ru } from 'date-fns/esm/locale';
 
 
 export function dateFormat(date) {
@@ -46,6 +46,12 @@ export function monthGenerator(num, date = new Date()) {
     return { id, label };
 
   });
+
+}
+
+export function longDate(date = new Date()) {
+
+  return format(date, 'PP', { locale: ru });
 
 }
 
