@@ -1,7 +1,7 @@
 import http from 'axios';
 
-const PHA_ROLES_URL = 'https://api.sistemium.com/pha/roles';
-const PHA_AUTH_URL = 'https://api.sistemium.com/pha/auth';
+const { PHA_ROLES_URL = 'https://api.sistemium.com/pha/roles' } = process.env;
+const { PHA_AUTH_URL = 'https://api.sistemium.com/pha/auth' } = process.env;
 
 export function roles(token) {
 
