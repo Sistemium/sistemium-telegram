@@ -5,16 +5,20 @@ const { ERROR_NAMESPACE = 'stm:tgb:error' } = process.env;
 
 export default function (ns) {
 
+  return nsLog(`${DEBUG_NAMESPACE}:${ns}`, `${ERROR_NAMESPACE}:${ns}`);
+
+}
+
+export function nsLog(ns, nsError = `${ns}:error`) {
   return {
     debug: debug(ns),
-    error: error(ns),
+    error: error(nsError),
   };
-
 }
 
 export function debug(ns) {
 
-  const log = debugLib(`${DEBUG_NAMESPACE}:${ns}`);
+  const log = debugLib(ns);
   // eslint-disable-next-line
   log.log = console.log.bind(console);
   return log;
@@ -23,6 +27,6 @@ export function debug(ns) {
 
 export function error(ns) {
 
-  return debugLib(`${ERROR_NAMESPACE}:${ns}`);
+  return debugLib(ns);
 
 }
