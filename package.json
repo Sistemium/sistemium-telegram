@@ -28,7 +28,7 @@
     "nodemon": "^1.18.3"
   },
   "scripts": {
-    "dev": "npm run lint && rm -rf dev && cp -r src dev && cp package.json dev && cd dev && npm link",
+    "dev": "npm run lint && rm -rf dev && babel src -d dev && cp package.json dev && cd dev && npm link dev",
     "lint": "eslint src",
     "test": "jest",
     "babel-node": "babel-node",
@@ -50,6 +50,6 @@
   },
   "homepage": "https://github.com/Sistemium/sistemium-telegram#readme",
   "engines": {
-    "node": "8.11.3"
+    "node": ">=8.11.3"
   }
 }
