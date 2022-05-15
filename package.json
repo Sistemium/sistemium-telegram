@@ -1,6 +1,6 @@
 {
   "name": "sistemium-telegram",
-  "version": "1.2.12",
+  "version": "1.2.14",
   "description": "Telegram bot helper",
   "main": "index.js",
   "dependencies": {
@@ -28,7 +28,7 @@
     "nodemon": "^1.18.3"
   },
   "scripts": {
-    "dev": "npm run lint && rm -rf dev && babel src -d dev && cp package.json dev && cd dev && npm link dev",
+    "dev": "npm run lint && rm -rf dev && cp -R src dev && cp package.json dev && npm link dev --production",
     "lint": "eslint src",
     "test": "jest",
     "babel-node": "babel-node",
